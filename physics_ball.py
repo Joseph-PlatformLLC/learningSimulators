@@ -35,14 +35,19 @@ class Simulator():
         self.colors = Colors()
         self.window = Window()
         self.clock = pygame.time.Clock()
+
         self.anchor = pygame.Rect(0,0,5,5)
         self.anchor.center = (self.window.x / 2), (self.window.y / 2)
+
         self.simDisplay = pygame.display.set_mode(( self.window.x, self.window.y ))
+
         self.tick = 20.0
         self.time = self.tick / 60
+
         self.center = (self.window.x / 2), (self.window.y / 2)
         self.ball = pygame.Rect(self.center[0], self.center[1] + 100, 25, 25)
         self.ball.center = (self.center[0] - 250, self.center[1] - 100)
+
         self.gravity = 10
         self.mass = 25
         self.running = True
@@ -66,17 +71,18 @@ class Simulator():
 
         self.velocityY = int(self.velocityY + (accelY * self.time))
         self.velocityX = int(self.velocityX + (accelX * self.time))
-
-        print 'Update V -> '+ str(self.velocityY) + ' , ' + str(self.velocityX)
-
+        #
+        # print 'Update V -> '+ str(self.velocityY) + ' , ' + str(self.velocityX)
+        #
         self.ball.y += int(math.ceil(self.velocityY * self.time))
         self.ball.x += int(math.ceil(self.velocityX * self.time))
 
         pygame.draw.rect(self.simDisplay, self.colors.black, self.anchor, 3)
         pygame.draw.line(self.simDisplay, self.colors.black, self.anchor.center, self.ball.center, 3)
         pygame.draw.circle(self.simDisplay, self.colors.red, self.ball.center , self.ball.width, 5)
-        print 'Update Y -> '+ str(forceY) + ' ' + str(accelY) + ' ' + str(self.velocityY)+ ' ' + str(springForceY)
-        print 'Update X -> '+ str(forceX) + ' ' + str(accelX) + ' ' + str(self.velocityX)+ ' ' + str(springForceX)
+        #
+        # print 'Update Y -> '+ str(forceY) + ' ' + str(accelY) + ' ' + str(self.velocityY)+ ' ' + str(springForceY)
+        # print 'Update X -> '+ str(forceX) + ' ' + str(accelX) + ' ' + str(self.velocityX)+ ' ' + str(springForceX)
 
     def run(self):
         while self.running:
